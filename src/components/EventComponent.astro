@@ -1,0 +1,41 @@
+---
+interface Props {
+  eventTitle: string;
+  date: string;
+  location: string;
+  description: string;
+  signupLink: string;
+  imageSrc?: string;
+  imageAlt?: string;
+}
+
+const {
+  eventTitle,
+  date,
+  location,
+  description,
+  signupLink,
+  imageSrc = "/images/mae_events_slide.jpeg",
+  imageAlt = eventTitle
+} = Astro.props;
+---
+
+<article class="event-card">
+  <div class="event-card__body">
+    <div class="event-card__image-wrap">
+      <img class="event-card__image" src={imageSrc} alt={imageAlt} />
+      <div class="event-card__overlay">
+        <div class="event-card__copy">
+          <h3>{eventTitle}</h3>
+          <p class="event-card__meta">{date} | {location}</p>
+          <p class="event-card__description">{description}</p>
+        </div>
+        <a class="event-card__cta" href={signupLink} target="_blank" rel="noreferrer">
+          RSVP
+        </a>
+      </div>
+    </div>
+
+    <div class="event-card__accent" aria-hidden="true"></div>
+  </div>
+</article>

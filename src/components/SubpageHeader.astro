@@ -1,0 +1,15 @@
+---
+interface Props {
+  homeHref?: string;
+  title: string;
+}
+
+const { homeHref = "/", title } = Astro.props;
+---
+
+<header class="subpage-header">
+  <h1 class="subpage-header__title">{title}</h1>
+  <a class="subpage-header__home" href={homeHref} aria-label="Back to homepage">
+    <img src="/assets/mta-logo-original.PNG.png" alt="MAE logo" />
+  </a>
+</header>

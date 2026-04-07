@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+import EventComponent from "../components/EventComponent.astro";
+import SubpageHeader from "../components/SubpageHeader.astro";
+import "../styles/global.css";
+---
+
+<Layout title="Events | MAE" description="MAE events page">
+  <main class="blank-page">
+    <SubpageHeader title="EVENTS" />
+    <section class="events-list" aria-label="Event listings">
+      <EventComponent
+        eventTitle="SPRING OPEN STUDIO."
+        date="04.18.2026"
+        location="Morningside Heights"
+        description="An evening of open studio visits, conversation, and collaborative making with local artists, neighbors, and first-time visitors."
+        signupLink="https://example.com/rsvp-spring-open-studio"
+        imageSrc="/images/mae_events_slide.jpeg"
+        imageAlt="People gathered together at a MAE event."
+      />
+      <EventComponent
+        eventTitle="COMMUNITY FILM NIGHT."
+        date="05.02.2026"
+        location="Harlem"
+        description="A neighborhood screening followed by a talkback on creative process, audience building, and sustaining artist-led spaces."
+        signupLink="https://example.com/rsvp-film-night"
+        imageSrc="/images/mae_join_slide.JPEG"
+        imageAlt="A person filming at an outdoor creative gathering."
+      />
+      <EventComponent
+        eventTitle="SUMMER ART EXCHANGE."
+        date="06.14.2026"
+        location="West Harlem"
+        description="A pop-up exchange featuring artists, small-run merchandise, music, and programming designed to create joyful entry points into the MAE community."
+        signupLink="https://example.com/rsvp-summer-art-exchange"
+        imageSrc="/images/mae_about_slide.jpeg"
+        imageAlt="Group seated together during an art-centered event."
+      />
+    </section>
+  </main>
+</Layout>

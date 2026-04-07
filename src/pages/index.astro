@@ -1,0 +1,222 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {
+  badgeConfig,
+  mobileBadgeConfig,
+  mobileScaffoldViewBox,
+  mobileSliceConfigs,
+  scaffoldViewBox,
+  sliceConfigs
+} from "../data/homeScaffold";
+import "../styles/global.css";
+---
+
+<Layout title="Mae" description="Mae landing page">
+  <main class="page-shell page-shell--locked">
+    <section class="svg-stage svg-stage--desktop" aria-label="Mae layout scaffold">
+      <svg
+        class="svg-stage__svg"
+        viewBox="0 0 1512 758"
+        role="img"
+        aria-labelledby="mae-stage-title mae-stage-desc"
+      >
+        <title id="mae-stage-title">Mae website scaffold</title>
+        <desc id="mae-stage-desc">
+          Five angled panel outlines with a circular logo badge centered near the top.
+        </desc>
+
+        <defs>
+          <clipPath id="mae-badge-clip" clipPathUnits="userSpaceOnUse">
+            <circle cx={badgeConfig.cx} cy={badgeConfig.cy} r={badgeConfig.r}></circle>
+          </clipPath>
+          {
+            sliceConfigs.map((slice) => (
+              <clipPath id={`clip-${slice.id}`} clipPathUnits="userSpaceOnUse">
+                <path d={slice.path}></path>
+              </clipPath>
+            ))
+          }
+        </defs>
+
+        <rect width={scaffoldViewBox.width} height={scaffoldViewBox.height} class="svg-stage__bg"></rect>
+
+        {
+          sliceConfigs.map((slice) => (
+            <image
+              href={slice.imageSrc}
+              x={slice.image.x}
+              y={slice.image.y}
+              width={slice.image.width}
+              height={slice.image.height}
+              preserveAspectRatio={slice.image.preserveAspectRatio ?? "xMidYMid slice"}
+              clip-path={`url(#clip-${slice.id})`}
+            />
+          ))
+        }
+
+        <g class="svg-stage__links">
+          {
+            sliceConfigs.map((slice) => (
+              <a href={slice.href} aria-label={slice.label} class="svg-stage__link">
+                <title>{slice.label}</title>
+                <path class="svg-stage__link-hit" d={slice.path}></path>
+                <path class="svg-stage__link-focus" d={slice.path}></path>
+              </a>
+            ))
+          }
+        </g>
+
+        <g class="svg-stage__labels" aria-hidden="true">
+          {
+            sliceConfigs.map((slice) => (
+              <text
+                class="svg-stage__label"
+                x={slice.text.x}
+                y={slice.text.y}
+                text-anchor={slice.text.textAnchor ?? "start"}
+                transform={`rotate(${slice.text.rotation} ${slice.text.x} ${slice.text.y})`}
+                style={`font-size:${slice.text.fontSize}px;letter-spacing:${slice.text.letterSpacing ?? "-0.08em"};`}
+              >
+                {slice.label}
+              </text>
+            ))
+          }
+        </g>
+
+        <a href="/" aria-label="Home" class="svg-stage__link svg-stage__badge-link">
+          <title>Home</title>
+          <image
+            href={badgeConfig.image.src}
+            x={badgeConfig.image.x}
+            y={badgeConfig.image.y}
+            width={badgeConfig.image.width}
+            height={badgeConfig.image.height}
+            preserveAspectRatio={badgeConfig.image.preserveAspectRatio}
+            clip-path="url(#mae-badge-clip)"
+          />
+          <circle class="svg-stage__link-hit" cx={badgeConfig.cx} cy={badgeConfig.cy} r={badgeConfig.r}></circle>
+          <circle
+            class="svg-stage__link-focus"
+            cx={badgeConfig.cx}
+            cy={badgeConfig.cy}
+            r={badgeConfig.r}
+          ></circle>
+        </a>
+      </svg>
+    </section>
+
+    <section class="svg-stage svg-stage--mobile" aria-label="Mae mobile layout scaffold">
+      <svg
+        class="svg-stage__svg svg-stage__svg--mobile"
+        viewBox={`0 0 ${mobileScaffoldViewBox.width} ${mobileScaffoldViewBox.height}`}
+        role="img"
+        aria-labelledby="mae-mobile-stage-title mae-mobile-stage-desc"
+      >
+        <title id="mae-mobile-stage-title">Mae mobile website scaffold</title>
+        <desc id="mae-mobile-stage-desc">
+          Mobile MAE navigation with events, about, merch, join, and contact panels around the logo.
+        </desc>
+
+        <defs>
+          <clipPath id="mae-mobile-badge-clip" clipPathUnits="userSpaceOnUse">
+            <circle
+              cx={mobileBadgeConfig.cx}
+              cy={mobileBadgeConfig.cy}
+              r={mobileBadgeConfig.r}
+            ></circle>
+          </clipPath>
+          {
+            mobileSliceConfigs.map((slice) => (
+              <clipPath id={`mobile-clip-${slice.id}`} clipPathUnits="userSpaceOnUse">
+                <path d={slice.path}></path>
+              </clipPath>
+            ))
+          }
+        </defs>
+
+        <rect
+          width={mobileScaffoldViewBox.width}
+          height={mobileScaffoldViewBox.height}
+          class="svg-stage__bg"
+        ></rect>
+
+        {
+          mobileSliceConfigs.map((slice) => (
+            <image
+              href={slice.imageSrc}
+              x={slice.image.x}
+              y={slice.image.y}
+              width={slice.image.width}
+              height={slice.image.height}
+              preserveAspectRatio={slice.image.preserveAspectRatio ?? "xMidYMid slice"}
+              clip-path={`url(#mobile-clip-${slice.id})`}
+            />
+          ))
+        }
+
+        <g class="svg-stage__links">
+          {
+            mobileSliceConfigs.map((slice) => (
+              <a href={slice.href} aria-label={slice.label} class="svg-stage__link">
+                <title>{slice.label}</title>
+                <path class="svg-stage__link-hit" d={slice.path}></path>
+                <path class="svg-stage__link-focus" d={slice.path}></path>
+              </a>
+            ))
+          }
+        </g>
+
+        <g class="svg-stage__labels svg-stage__labels--mobile" aria-hidden="true">
+          {
+            mobileSliceConfigs.map((slice) => (
+              <text
+                class="svg-stage__label svg-stage__label--mobile"
+                x={slice.text.x}
+                y={slice.text.y}
+                text-anchor={slice.text.textAnchor ?? "middle"}
+                transform={`rotate(${slice.text.rotation} ${slice.text.x} ${slice.text.y})`}
+                style={`font-size:${slice.text.fontSize}px;letter-spacing:${slice.text.letterSpacing ?? "-0.03em"};`}
+              >
+                {slice.label}
+              </text>
+            ))
+          }
+        </g>
+
+        <a href="/" aria-label="Home" class="svg-stage__link svg-stage__badge-link">
+          <title>Home</title>
+          <image
+            href={mobileBadgeConfig.image.src}
+            x={mobileBadgeConfig.image.x}
+            y={mobileBadgeConfig.image.y}
+            width={mobileBadgeConfig.image.width}
+            height={mobileBadgeConfig.image.height}
+            preserveAspectRatio={mobileBadgeConfig.image.preserveAspectRatio}
+            clip-path="url(#mae-mobile-badge-clip)"
+          />
+          <circle
+            class="svg-stage__link-hit"
+            cx={mobileBadgeConfig.cx}
+            cy={mobileBadgeConfig.cy}
+            r={mobileBadgeConfig.r}
+          ></circle>
+          <circle
+            class="svg-stage__link-focus"
+            cx={mobileBadgeConfig.cx}
+            cy={mobileBadgeConfig.cy}
+            r={mobileBadgeConfig.r}
+          ></circle>
+        </a>
+      </svg>
+    </section>
+
+    <div class="intro-copy">
+      <h1 class="intro-copy__title">Morningside Art Exchange.</h1>
+      <p class="intro-copy__body">
+        Founded in 2023, Morningside Art Exchange is a grassroots arts collective curating inclusive, sensory-driven
+        events that connect artists with communities and challenge traditional art world hierarchies
+        through joy, collaboration, and accessibility.
+      </p>
+    </div>
+  </main>
+</Layout>

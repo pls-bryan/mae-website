@@ -1,0 +1,26 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Mae",
+  description = "Landing page for Mae."
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/assets/mta-logo-original.PNG.png" />
+    <link rel="apple-touch-icon" href="/assets/mta-logo-original.PNG.png" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

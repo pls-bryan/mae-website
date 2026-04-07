@@ -1,0 +1,70 @@
+---
+const FORMSPREE_PLACEHOLDER = "https://formspree.io/f/your-form-id";
+---
+
+<section class="join-form-panel" aria-labelledby="join-form-title">
+  <div class="join-form-panel__intro">
+    <h2 id="join-form-title">GET INVOLVED</h2>
+    <p>
+      Tell us a bit about yourself and how you’d like to be part of the MAE
+      community. Once you send the live Formspree endpoint, this form is ready to
+      plug it in.
+    </p>
+  </div>
+
+  <form class="join-form" action={FORMSPREE_PLACEHOLDER} method="POST">
+    <input type="hidden" name="_subject" value="New MAE join form submission" />
+
+    <label class="join-form__field">
+      <span>Name</span>
+      <input type="text" name="name" autocomplete="name" placeholder="Your name" required />
+    </label>
+
+    <div class="join-form__row">
+      <label class="join-form__field">
+        <span>Email</span>
+        <input
+          type="email"
+          name="email"
+          autocomplete="email"
+          placeholder="yourname@email.com"
+          required
+        />
+      </label>
+
+      <label class="join-form__field">
+        <span>Phone Number</span>
+        <input
+          type="tel"
+          name="phone"
+          autocomplete="tel"
+          placeholder="(555) 555-5555"
+          required
+        />
+      </label>
+    </div>
+
+    <label class="join-form__field">
+      <span>Why do you want to join?</span>
+      <textarea
+        name="why_join"
+        rows="5"
+        placeholder="Tell us what draws you to MAE, what kind of involvement you're looking for, or how you'd like to contribute."
+        required
+      ></textarea>
+    </label>
+
+    <label class="join-form__field">
+      <span>Additional Note (Optional)</span>
+      <textarea
+        name="additional_note"
+        rows="4"
+        placeholder="Anything else you'd like us to know."
+      ></textarea>
+    </label>
+
+    <div class="join-form__actions">
+      <button class="join-form__submit" type="submit">Send Interest</button>
+    </div>
+  </form>
+</section>

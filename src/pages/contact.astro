@@ -1,0 +1,19 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SubpageHeader from "../components/SubpageHeader.astro";
+import "../styles/global.css";
+
+const instagramHref = "https://www.instagram.com/morningsideartexchange";
+---
+
+<Layout title="Contact | MAE" description="Contact Morningside Art Exchange">
+  <main class="blank-page contact-page">
+    <SubpageHeader title="CONTACT" />
+    <section class="contact-panel">
+      <p>Find MAE on Instagram for updates, inquiries, and upcoming programming.</p>
+      <a class="contact-panel__link" href={instagramHref} target="_blank" rel="noreferrer">
+        @morningsideartexchange
+      </a>
+    </section>
+  </main>
+</Layout>
