@@ -1,5 +1,5 @@
 ---
-const FORMSPREE_PLACEHOLDER = "https://formspree.io/f/your-form-id";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mreodrve";
 ---
 
 <section class="join-form-panel" aria-labelledby="join-form-title">
@@ -7,12 +7,11 @@ const FORMSPREE_PLACEHOLDER = "https://formspree.io/f/your-form-id";
     <h2 id="join-form-title">GET INVOLVED</h2>
     <p>
       Tell us a bit about yourself and how you’d like to be part of the MAE
-      community. Once you send the live Formspree endpoint, this form is ready to
-      plug it in.
+      community.
     </p>
   </div>
 
-  <form class="join-form" action={FORMSPREE_PLACEHOLDER} method="POST">
+  <form class="join-form" action={FORMSPREE_ENDPOINT} method="POST">
     <input type="hidden" name="_subject" value="New MAE join form submission" />
 
     <label class="join-form__field">
