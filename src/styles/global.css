@@ -364,6 +364,7 @@ body {
 
 .contact-panel__icon {
   display: inline-flex;
+  justify-self: center;
   align-items: center;
   justify-content: center;
   width: 2.5rem;
