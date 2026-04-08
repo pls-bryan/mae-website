@@ -1,11 +1,15 @@
 ---
+import type { ImageMetadata } from "astro";
+import { getImage } from "astro:assets";
+import defaultEventImage from "../assets/images/mae_events_slide.jpeg";
+
 interface Props {
   eventTitle: string;
   date: string;
   location: string;
   description: string;
   signupLink: string;
-  imageSrc?: string;
+  imageSrc?: ImageMetadata;
   imageAlt?: string;
 }
 
@@ -15,15 +19,30 @@ const {
   location,
   description,
   signupLink,
-  imageSrc = "/images/mae_events_slide.jpeg",
+  imageSrc = defaultEventImage,
   imageAlt = eventTitle
 } = Astro.props;
+
+const optimizedImage = await getImage({
+  src: imageSrc,
+  format: "webp",
+  width: 1600,
+  quality: 84
+});
 ---
 
 <article class="event-card">
   <div class="event-card__body">
     <div class="event-card__image-wrap">
-      <img class="event-card__image" src={imageSrc} alt={imageAlt} />
+      <img
+        class="event-card__image"
+        src={optimizedImage.src}
+        width={optimizedImage.attributes.width}
+        height={optimizedImage.attributes.height}
+        alt={imageAlt}
+        loading="lazy"
+        decoding="async"
+      />
       <div class="event-card__overlay">
         <div class="event-card__copy">
           <h3>{eventTitle}</h3>

@@ -246,7 +246,8 @@ body {
 }
 
 .about-panel__eyebrow,
-.soon-panel__kicker {
+.soon-panel__kicker,
+.contact-panel__eyebrow {
   color: var(--accent);
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: clamp(1rem, 2vw, 1.35rem);
@@ -276,7 +277,7 @@ body {
 .contact-panel__link {
   color: var(--accent);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  font-size: clamp(1.2rem, 2.2vw, 2rem);
   font-weight: 700;
   line-height: 1.05;
 }
@@ -289,9 +290,123 @@ body {
   line-height: 1.4;
 }
 
+.soon-panel--merch {
+  display: grid;
+  place-items: center;
+  min-height: clamp(20rem, 56vh, 34rem);
+  padding: clamp(2rem, 4vw, 3.5rem);
+  text-align: center;
+}
+
+.soon-panel__sign {
+  display: grid;
+  gap: 0.1em;
+  color: var(--accent);
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(4.5rem, 13vw, 10rem);
+  line-height: 0.84;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.soon-panel__sign span {
+  display: block;
+}
+
+.contact-panel {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.contact-panel__intro {
+  max-width: 52rem;
+}
+
+.contact-panel__title,
+.contact-panel__body {
+  margin-top: 0.85rem;
+}
+
+.contact-panel__title {
+  margin-bottom: 0;
+  color: var(--accent);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1.75rem, 3.4vw, 3.1rem);
+  font-weight: 700;
+  line-height: 1.05;
+}
+
+.contact-panel__body {
+  margin-bottom: 0;
+}
+
+.contact-panel__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.contact-panel__card {
+  display: grid;
+  min-width: 0;
+  gap: 0.75rem;
+  align-content: start;
+  padding: 1.1rem 1.15rem;
+  border: 1px solid rgba(234, 90, 29, 0.24);
+  background: rgba(255, 255, 255, 0.38);
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 140ms ease,
+    border-color 140ms ease,
+    background-color 140ms ease;
+}
+
+.contact-panel__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: var(--accent);
+}
+
+.contact-panel__icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.contact-panel__icon-dot {
+  fill: currentColor;
+  stroke: none;
+}
+
 .contact-panel__link {
   display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   text-decoration-thickness: 0.08em;
+}
+
+.contact-panel__card-copy {
+  color: var(--text);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(0.98rem, 1.35vw, 1.08rem);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.contact-panel__card:hover,
+.contact-panel__card:focus-visible {
+  border-color: rgba(234, 90, 29, 0.55);
+  background: rgba(234, 90, 29, 0.08);
+  transform: translateY(-2px);
 }
 
 .contact-panel__link:hover,
@@ -304,22 +419,18 @@ body {
   gap: 1.25rem;
 }
 
+.join-form-panel__intro {
+  text-align: center;
+}
+
 .join-form-panel__intro h2 {
   margin: 0;
   color: var(--accent);
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-size: clamp(3.6rem, 8vw, 6.5rem);
   font-weight: 400;
   letter-spacing: 0.01em;
   line-height: 0.92;
-}
-
-.join-form-panel__intro p:last-child {
-  margin: 0.8rem 0 0;
-  color: var(--text);
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1rem, 1.5vw, 1.15rem);
-  line-height: 1.4;
 }
 
 .join-form {
@@ -669,6 +780,10 @@ body {
 
   .blank-page {
     padding-inline: 0;
+  }
+
+  .contact-panel__grid {
+    grid-template-columns: 1fr;
   }
 
   .join-form__row {

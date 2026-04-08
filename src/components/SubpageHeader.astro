@@ -1,15 +1,33 @@
 ---
+import { getImage } from "astro:assets";
+import maeLogo from "../assets/logo/mta-logo-original.PNG.png";
+
 interface Props {
   homeHref?: string;
   title: string;
 }
 
 const { homeHref = "/", title } = Astro.props;
+
+const optimizedLogo = await getImage({
+  src: maeLogo,
+  format: "webp",
+  width: 256,
+  quality: 88
+});
 ---
 
 <header class="subpage-header">
   <h1 class="subpage-header__title">{title}</h1>
   <a class="subpage-header__home" href={homeHref} aria-label="Back to homepage">
-    <img src="/assets/mta-logo-original.PNG.png" alt="MAE logo" />
+    <img
+      src={optimizedLogo.src}
+      width={optimizedLogo.attributes.width}
+      height={optimizedLogo.attributes.height}
+      alt="MAE logo"
+      loading="eager"
+      decoding="async"
+      fetchpriority="high"
+    />
   </a>
 </header>

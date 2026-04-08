@@ -2,6 +2,9 @@
 import Layout from "../layouts/Layout.astro";
 import EventComponent from "../components/EventComponent.astro";
 import SubpageHeader from "../components/SubpageHeader.astro";
+import maeAboutSlide from "../assets/images/mae_about_slide.jpeg";
+import maeEventsSlide from "../assets/images/mae_events_slide.jpeg";
+import maeJoinSlide from "../assets/images/mae_join_slide.JPEG";
 import "../styles/global.css";
 ---
 
@@ -15,7 +18,7 @@ import "../styles/global.css";
         location="Morningside Heights"
         description="An evening of open studio visits, conversation, and collaborative making with local artists, neighbors, and first-time visitors."
         signupLink="https://example.com/rsvp-spring-open-studio"
-        imageSrc="/images/mae_events_slide.jpeg"
+        imageSrc={maeEventsSlide}
         imageAlt="People gathered together at a MAE event."
       />
       <EventComponent
@@ -24,7 +27,7 @@ import "../styles/global.css";
         location="Harlem"
         description="A neighborhood screening followed by a talkback on creative process, audience building, and sustaining artist-led spaces."
         signupLink="https://example.com/rsvp-film-night"
-        imageSrc="/images/mae_join_slide.JPEG"
+        imageSrc={maeJoinSlide}
         imageAlt="A person filming at an outdoor creative gathering."
       />
       <EventComponent
@@ -33,7 +36,7 @@ import "../styles/global.css";
         location="West Harlem"
         description="A pop-up exchange featuring artists, small-run merchandise, music, and programming designed to create joyful entry points into the MAE community."
         signupLink="https://example.com/rsvp-summer-art-exchange"
-        imageSrc="/images/mae_about_slide.jpeg"
+        imageSrc={maeAboutSlide}
         imageAlt="Group seated together during an art-centered event."
       />
     </section>

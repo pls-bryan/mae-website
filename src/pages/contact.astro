@@ -4,16 +4,48 @@ import SubpageHeader from "../components/SubpageHeader.astro";
 import "../styles/global.css";
 
 const instagramHref = "https://www.instagram.com/morningsideartexchange";
+const emailHref = "mailto:contact@morningsideartexchange.org";
 ---
 
 <Layout title="Contact | MAE" description="Contact Morningside Art Exchange">
   <main class="blank-page contact-page">
     <SubpageHeader title="CONTACT" />
     <section class="contact-panel">
-      <p>Find MAE on Instagram for updates, inquiries, and upcoming programming.</p>
-      <a class="contact-panel__link" href={instagramHref} target="_blank" rel="noreferrer">
-        @morningsideartexchange
-      </a>
+      <div class="contact-panel__intro">
+        <p class="contact-panel__eyebrow">Connect With MAE</p>
+        <p class="contact-panel__title">
+          Reach out for collaborations, programming questions, and community inquiries.
+        </p>
+        <p class="contact-panel__body">
+          Follow along for upcoming events, or send an email if you want to partner,
+          participate, or get in touch directly.
+        </p>
+      </div>
+
+      <div class="contact-panel__grid">
+        <a class="contact-panel__card" href={instagramHref} target="_blank" rel="noreferrer">
+          <span class="contact-panel__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              <rect x="3.25" y="3.25" width="17.5" height="17.5" rx="5"></rect>
+              <circle cx="12" cy="12" r="4.25"></circle>
+              <circle cx="17.35" cy="6.65" r="1.2" class="contact-panel__icon-dot"></circle>
+            </svg>
+          </span>
+          <span class="contact-panel__link">@morningsideartexchange</span>
+          <span class="contact-panel__card-copy">Updates, announcements, and event news.</span>
+        </a>
+
+        <a class="contact-panel__card" href={emailHref}>
+          <span class="contact-panel__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" role="presentation" focusable="false">
+              <rect x="2.75" y="5.5" width="18.5" height="13" rx="2"></rect>
+              <path d="M4.75 7.25 12 12.75 19.25 7.25"></path>
+            </svg>
+          </span>
+          <span class="contact-panel__link">contact@morningsideartexchange.org</span>
+          <span class="contact-panel__card-copy">Direct outreach for questions and collaborations.</span>
+        </a>
+      </div>
     </section>
   </main>
 </Layout>
