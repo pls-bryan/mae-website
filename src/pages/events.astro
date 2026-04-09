@@ -1,4 +1,5 @@
 ---
+import { readFile } from "node:fs/promises";
 import Layout from "../layouts/Layout.astro";
 import EventComponent from "../components/EventComponent.astro";
 import SubpageHeader from "../components/SubpageHeader.astro";
@@ -6,39 +7,93 @@ import maeAboutSlide from "../assets/images/mae_about_slide.jpeg";
 import maeEventsSlide from "../assets/images/mae_events_slide.jpeg";
 import maeJoinSlide from "../assets/images/mae_join_slide.JPEG";
 import "../styles/global.css";
+
+const csvPath = new URL("../../public/assets/MAE Event List - Sheet1.csv", import.meta.url);
+const remoteCsvUrl = import.meta.env.EVENTS_CSV_URL;
+
+const csvText = remoteCsvUrl
+  ? await fetch(remoteCsvUrl).then(async (response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to fetch events CSV: ${response.status} ${response.statusText}`);
+      }
+
+      return response.text();
+    })
+  : await readFile(csvPath, "utf-8");
+
+const parseCsvLine = (line: string) => line.split(",").map((value) => value.trim());
+
+const formatDate = (value: string) => {
+  const parsedDate = new Date(value);
+
+  if (Number.isNaN(parsedDate.valueOf())) {
+    return value;
+  }
+
+  return new Intl.DateTimeFormat("en-US", {
+    month: "2-digit",
+    day: "2-digit",
+    year: "numeric"
+  })
+    .format(parsedDate)
+    .replaceAll("/", ".");
+};
+
+const normalizeLink = (value: string) => {
+  if (!value) {
+    return "#";
+  }
+
+  return /^https?:\/\//i.test(value) ? value : `https://${value}`;
+};
+
+const eventImages = [maeEventsSlide, maeJoinSlide, maeAboutSlide];
+const eventImageAlts = [
+  "People gathered together at a MAE event.",
+  "A person filming at an outdoor creative gathering.",
+  "Group seated together during an art-centered event."
+];
+
+const [headerLine, ...rows] = csvText
+  .split(/\r?\n/)
+  .map((line) => line.trim())
+  .filter(Boolean);
+
+const headers = parseCsvLine(headerLine).map((header) => header.toLowerCase());
+
+const events = rows.map((row, index) => {
+  const values = parseCsvLine(row);
+  const record = Object.fromEntries(headers.map((header, valueIndex) => [header, values[valueIndex] ?? ""]));
+
+  return {
+    eventTitle: record["event title"] || "Untitled Event",
+    date: formatDate(record.date || ""),
+    location: record.location || "Location TBA",
+    description: record.description || "",
+    signupLink: normalizeLink(record.link || ""),
+    imageSrc: eventImages[index % eventImages.length],
+    imageAlt: eventImageAlts[index % eventImageAlts.length]
+  };
+});
 ---
 
 <Layout title="Events | MAE" description="MAE events page">
   <main class="blank-page">
     <SubpageHeader title="EVENTS" />
     <section class="events-list" aria-label="Event listings">
-      <EventComponent
-        eventTitle="SPRING OPEN STUDIO."
-        date="04.18.2026"
-        location="Morningside Heights"
-        description="An evening of open studio visits, conversation, and collaborative making with local artists, neighbors, and first-time visitors."
-        signupLink="https://example.com/rsvp-spring-open-studio"
-        imageSrc={maeEventsSlide}
-        imageAlt="People gathered together at a MAE event."
-      />
-      <EventComponent
-        eventTitle="COMMUNITY FILM NIGHT."
-        date="05.02.2026"
-        location="Harlem"
-        description="A neighborhood screening followed by a talkback on creative process, audience building, and sustaining artist-led spaces."
-        signupLink="https://example.com/rsvp-film-night"
-        imageSrc={maeJoinSlide}
-        imageAlt="A person filming at an outdoor creative gathering."
-      />
-      <EventComponent
-        eventTitle="SUMMER ART EXCHANGE."
-        date="06.14.2026"
-        location="West Harlem"
-        description="A pop-up exchange featuring artists, small-run merchandise, music, and programming designed to create joyful entry points into the MAE community."
-        signupLink="https://example.com/rsvp-summer-art-exchange"
-        imageSrc={maeAboutSlide}
-        imageAlt="Group seated together during an art-centered event."
-      />
+      {
+        events.map((event) => (
+          <EventComponent
+            eventTitle={event.eventTitle}
+            date={event.date}
+            location={event.location}
+            description={event.description}
+            signupLink={event.signupLink}
+            imageSrc={event.imageSrc}
+            imageAlt={event.imageAlt}
+          />
+        ))
+      }
     </section>
   </main>
 </Layout>
